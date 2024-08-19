@@ -17,7 +17,7 @@ jobs:
     name: Setup
     runs-on: ubuntu-22.04
     outputs:
-      targets: ${{ steps.get-targets.outputs.targets }}
+      targets: STM32F405
     steps:
       - uses: actions/checkout@v4
 
@@ -64,11 +64,11 @@ jobs:
 
       - name: Build target (without revision)
         if: inputs.release_build == true
-        run: make EXTRA_FLAGS=-Werror ${{ matrix.target }}
+        run: make EXTRA_FLAGS="-D'BUILD_KEY=3b60871dcb07e8036a29b40b9f439f75' -D'RELEASE_NAME=4.6.0-dev' -DCLOUD_BUILD -DUSE_ACRO_TRAINER -DUSE_DSHOT -DUSE_GPS -DUSE_GPS_PLUS_CODES -DUSE_LED_STRIP -DUSE_OSD -DUSE_OSD_HD -DUSE_OSD_SD -DUSE_PINIO -DUSE_SERIALRX -DUSE_SERIALRX_CRSF -DUSE_TELEMETRY -DUSE_TELEMETRY_CRSF -DUSE_VTX" ${{ matrix.target }}
 
       - name: Build target (with revision)
         if: inputs.release_build == false
-        run: make EXTRA_FLAGS=-Werror ${{ matrix.target }}_rev
+        run: make EXTRA_FLAGS="-D'BUILD_KEY=3b60871dcb07e8036a29b40b9f439f75' -D'RELEASE_NAME=4.6.0-dev' -DCLOUD_BUILD -DUSE_ACRO_TRAINER -DUSE_DSHOT -DUSE_GPS -DUSE_GPS_PLUS_CODES -DUSE_LED_STRIP -DUSE_OSD -DUSE_OSD_HD -DUSE_OSD_SD -DUSE_PINIO -DUSE_SERIALRX -DUSE_SERIALRX_CRSF -DUSE_TELEMETRY -DUSE_TELEMETRY_CRSF -DUSE_VTX" ${{ matrix.target }}_rev
 
       - name: Publish build artifacts
         uses: actions/upload-artifact@v4
