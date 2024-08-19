@@ -17,7 +17,7 @@ jobs:
     name: Setup
     runs-on: ubuntu-22.04
     outputs:
-      targets: STM32F405
+      targets: ${{ steps.get-targets.outputs.targets }}
     steps:
       - uses: actions/checkout@v4
 
