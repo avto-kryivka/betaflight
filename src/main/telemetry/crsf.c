@@ -359,7 +359,7 @@ static void crsfFrameAltitude(sbuf_t* dst)
     // use sbufWrite since CRC does not include frame length
     sbufWriteU8(dst, CRSF_FRAME_BARO_ALTITUDE_PAYLOAD_SIZE + CRSF_FRAME_LENGTH_TYPE_CRC);
     sbufWriteU8(dst, CRSF_FRAMETYPE_BARO_ALTITUDE);
-    sbufWriteU16BigEndian(dst, getAltitudePacked((baro.BaroAlt+5)/10));
+    sbufWriteU16BigEndian(dst, getAltitudePacked((baro.altitude+5)/10));
     sbufWriteU8(dst, getVerticalSpeedPacked(getEstimatedVario()));
 }
 #endif 
